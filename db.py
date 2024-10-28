@@ -6,7 +6,7 @@ def initialize_db():
     cursor = conn.cursor()
     
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS guests (
+        CREATE TABLE IF NOT EXISTS drinks (
             drink_id INTEGER PRIMARY KEY AUTOINCREMENT,
             drink_name TEXT NOT NULL,
             category TEXT NOT NULL,
