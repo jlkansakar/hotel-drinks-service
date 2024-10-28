@@ -2,34 +2,35 @@ import sqlite3
 import csv
 
 def initialize_db():
-    conn = sqlite3.connect('guests.db')
+    conn = sqlite3.connect('drinks.db')
     cursor = conn.cursor()
     
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS guests (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            first_name TEXT NOT NULL,
-            last_name TEXT NOT NULL,
-            country TEXT NOT NULL
+            drink_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            drink_name TEXT NOT NULL,
+            category TEXT NOT NULL,
+            price REAL NOT NULL,
+            sale_count INT NOT NULL
         )
     ''')
     
     conn.commit()
     conn.close()
-    print("Database and table 'guests' initialized successfully.")
+    print("Database and table 'drinks' initialized successfully.")
 
 
 def populate_db():
-    conn = sqlite3.connect('guests.db')
+    conn = sqlite3.connect('drinks.db')
     cursor = conn.cursor()
 
-    with open("international_names_with_rooms_1000.csv", mode='r', newline='', encoding='utf-8') as file:
+    with open("drinks_menu_with_sales.csv", mode='r', newline='', encoding='utf-8') as file:
         csv_reader = csv.DictReader(file, delimiter=',')
         for row in csv_reader:
             cursor.execute('''
-                INSERT INTO guests (first_name, last_name, country)
-                VALUES (?, ?, ?)
-            ''', (row['First Name'], row['Family Name'], row['Country']))
+                INSERT INTO drinks (drink_name, category, price, sale_count)
+                VALUES (?, ?, ?, ?)
+            ''', (row['Drink Name'], row['Category'], row['Price (DKK)'], row['Units Sold']))
 
     conn.commit()
     conn.close()
