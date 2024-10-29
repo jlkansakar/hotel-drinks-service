@@ -3,114 +3,120 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-@app.route("/guests", methods=['GET', 'POST'])
-def guests():
-    conn = sqlite3.connect('guests.db')
+@app.route("/drinks", methods=['GET', 'POST'])
+def drinks():
+    conn = sqlite3.connect('drinks.db')
     cursor = conn.cursor()
 
     if request.method == 'GET':
-        cursor.execute('SELECT * FROM guests')
+        cursor.execute('SELECT * FROM drinks')
         result = cursor.fetchall()
 
         if not result:
             return jsonify([])
 
-        guests = []
+        drinks = []
 
         for row in result:
-            guest = {
-                "id": row[0],
-                "first_name": row[1],
-                "last_name": row[2],
-                "country": row[3]
+            drink = {
+                "drink_id": row[0],
+                "drink_name": row[1],
+                "category": row[2],
+                "price": row[3],
+                "sale_count": row[4]
             }
-            guests.append(guest)
+            drinks.append(drink)
 
         conn.close()
         
-        return jsonify(guests)
+        return jsonify(drinks)
     
     elif request.method == 'POST':
         data = request.get_json()
-        first_name = data.get('first_name')
-        last_name = data.get('last_name')
-        country = data.get('country')
+        drink_name = data.get('drink_name')
+        category = data.get('category')
+        price = data.get('price')
+        sale_count = data.get('sale_count')
 
         cursor.execute('''
-            INSERT INTO guests (first_name, last_name, country)
-            VALUES (?, ?, ?)
-        ''', (first_name, last_name, country))
+            INSERT INTO guests (drink_name, category, price, sale_count)
+            VALUES (?, ?, ?, ?)
+        ''', (drink_name, category, price, sale_count))
         
-        guest_id = cursor.lastrowid
+        drink_id = cursor.lastrowid
 
         conn.commit()
         conn.close()
 
-        new_guest = {
-            "id": guest_id,
-            "first_name": first_name,
-            "last_name": last_name,
-            "country": country
+        new_drink = {
+            "drink_id": drink_id,
+            "drink_name": drink_name,
+            "category": category,
+            "price": price,
+            "sale_count": sale_count
         }
         
-        return jsonify(new_guest), 201
+        return jsonify(new_drink), 201
     
 
-@app.route("/guests/<int:id>", methods=['GET','DELETE', 'PUT', 'PATCH'])
-def guest(id):
-    conn = sqlite3.connect('guests.db')
+@app.route("/drinks/<int:drink_id>", methods=['GET','DELETE', 'PUT', 'PATCH'])
+def drink(drink_id):
+    conn = sqlite3.connect('drinks.db')
     cursor = conn.cursor()
 
     if request.method == 'GET':
-        cursor.execute('SELECT * FROM guests WHERE id = ?', (id,))
+        cursor.execute('SELECT * FROM drinks WHERE drink_id = ?', (drink_id,))
         result = cursor.fetchone()
 
         if result is None:
-            return jsonify({"error": "Guest not found"}), 404
+            return jsonify({"error": "Drink not found"}), 404
 
         
-        guest = {
-            "id": result[0],
-            "first_name": result[1],
-            "last_name": result[2],
-            "country": result[3]
+        drink = {
+            "drink_id": result[0],
+            "drink_name": result[1],
+            "category": result[2],
+            "price": result[3],
+            "sale_count": result[4]
         }
 
         conn.close()
         
-        return jsonify(guest)
+        return jsonify(drink)
     
     elif request.method == 'DELETE':
-        cursor.execute('DELETE FROM guests WHERE id = ?', (id,))
+        cursor.execute('DELETE FROM drinks WHERE drink_id = ?', (drink_id,))
         conn.commit()
         conn.close()
         
         if cursor.rowcount == 0:
-            return jsonify({"error": "Guest not found"}), 404
+            return jsonify({"error": "Drink not found"}), 404
         
         return "", 204
 
     elif request.method in ['PUT', 'PATCH']:
         data = request.get_json()
-        first_name = data.get("first_name")
-        last_name = data.get("last_name")
-        country = data.get("country")
+        drink_name = data.get("drink_name")
+        category = data.get("category")
+        price = data.get("price")
+        sale_count = data.get("sale_count")
 
         cursor.execute('''
-            UPDATE guests 
-            SET first_name = COALESCE(?, first_name), 
-                last_name = COALESCE(?, last_name), 
-                country = COALESCE(?, country)
-            WHERE id = ?
-        ''', (first_name, last_name, country, id))
+            UPDATE drinks
+            SET drink_name = COALESCE(?, drink_name), 
+                category = COALESCE(?, category), 
+                price = COALESCE(?, price)
+                sale_count = COALESCE(?, sale_count)
+            WHERE drink_id = ?
+        ''', (drink_name, category, price, sale_count, drink_id))
 
         conn.commit()
 
         if cursor.rowcount == 0:
-            return jsonify({"error": "Guest not found"}), 404
+            return jsonify({"error": "Drink not found"}), 404
 
         conn.close()
-        return jsonify({"message": "Guest updated successfully"}), 200
+        return jsonify({"message": "Drink updated successfully"}), 200
     
 
 if __name__ == "__main__":
