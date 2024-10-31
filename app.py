@@ -105,7 +105,7 @@ def drink(drink_id):
             UPDATE drinks
             SET drink_name = COALESCE(?, drink_name), 
                 category = COALESCE(?, category), 
-                price = COALESCE(?, price)
+                price = COALESCE(?, price),
                 sale_count = COALESCE(?, sale_count)
             WHERE drink_id = ?
         ''', (drink_name, category, price, sale_count, drink_id))
