@@ -30,7 +30,7 @@ def populate_db():
             cursor.execute('''
                 INSERT INTO drinks (drink_name, category, price, sale_count)
                 VALUES (?, ?, ?, ?)
-            ''', (row['Drink Name'], row['Category'], row['Price (DKK)'], row['Units Sold']))
+            ''', (row['Drink Name'], row['Category'], float(row['Price (DKK)']), int(row['Units Sold'])))   
 
     conn.commit()
     conn.close()
