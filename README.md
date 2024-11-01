@@ -1,4 +1,4 @@
-# Guests API
+# Drinks API
 
 This API allows you to manage and edit a drinks database in SQLite. You can perform CRUD operations such as create, retrieve, update and delete.
 
@@ -8,7 +8,7 @@ This API allows you to manage and edit a drinks database in SQLite. You can perf
   Retrieves a list of all drinks and their respective information.
 
   **Response**:  
-  - `200 OK` with a JSON array of guests:
+  - `200 OK` with a JSON array of drinks:
     ```json
     [
         {
@@ -56,7 +56,7 @@ This API allows you to manage and edit a drinks database in SQLite. You can perf
   Retrieves a specific drink by their drink ID.
 
   **Response**:  
-  - `200 OK` with guest details:
+  - `200 OK` with drink details:
     ```json
     [
         {
