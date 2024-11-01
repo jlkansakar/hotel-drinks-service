@@ -23,7 +23,7 @@ This API allows you to manage and edit a drinks database in SQLite. You can perf
     ```
   - If no drinks are found, returns an empty array: `[]`.
 
-- **POST /guests**  
+- **POST /drinks**  
   Adds a new drink to the database.
 
   **Request Body**:
