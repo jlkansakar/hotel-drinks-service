@@ -1,87 +1,94 @@
 # Guests API
 
-This API allows you to manage guest records in a SQLite database. You can perform CRUD operations such as retrieving, adding, updating, and deleting guest information.
+This API allows you to manage and edit a drinks database in SQLite. You can perform CRUD operations such as create, retrieve, update and delete.
 
 ## Endpoints
 
-- **GET /guests**  
-  Retrieves a list of all guests.
+- **GET /drinks**  
+  Retrieves a list of all drinks and their respective information.
 
   **Response**:  
   - `200 OK` with a JSON array of guests:
     ```json
     [
         {
-            "id": 1,
-            "first_name": "Liam",
-            "last_name": "Nguyen",
-            "country": "China"
+            "drink_id": 1,
+            "drink_name": "Mai Tai",
+            "category": "Cocktail",
+            "price": "170",
+            "sale_count": 2360
         },
         ...
     ]
     ```
-  - If no guests are found, returns an empty array: `[]`.
+  - If no drinks are found, returns an empty array: `[]`.
 
 - **POST /guests**  
-  Adds a new guest to the database.
+  Adds a new drink to the database.
 
   **Request Body**:
   ```json
   {
-      "first_name": "John",
-      "last_name": "Doe",
-      "country": "USA"
+      "drink_id": 11,
+      "drink_name": "White Russia ",
+      "category": "Cocktail",
+      "price": "160",
+      "sale_count": 0
   }
 
 **Response**:  
-- `201 Created` with the newly created guest:
+- `201 Created` with the newly created drink:
   ```json
   [
       {
-          "id": 1,
-          "first_name": "Liam",
-          "last_name": "Nguyen",
-          "country": "China"
+          "drink_id": 11,
+          "drink_name": "White Russia ",
+          "category": "Cocktail",
+          "price": "160",
+          "sale_count": 0
       },
       ...
   ]
   ```
 -
 
-- **GET /guests/int:id**  
-  Retrieves a specific guest by ID.
+- **GET /drinks/int:id**  
+  Retrieves a specific drink by their drink ID.
 
   **Response**:  
   - `200 OK` with guest details:
     ```json
     [
         {
-            "id": 1,
-            "first_name": "Liam",
-            "last_name": "Nguyen",
-            "country": "China"
+          "drink_id": 11,
+          "drink_name": "White Russia ",
+          "category": "Cocktail",
+          "price": "160",
+          "sale_count": 0
         },
         ...
     ]
     ```
-  - `404 Not Found` if the guest does not exist.
+  - `404 Not Found` if the drink does not exist.
 
-  - **DELETE /guests/int:id**  
-  Deletes a guest by ID.
+  - **DELETE /drinks/int:id**  
+  Deletes a drink by their drink ID.
 
   **Response**:  
   - `204 No Content` if the deletion is successful.
-  - `404 Not Found` if the guest does not exist
+  - `404 Not Found` if the drink does not exist
 
-  - **PUT OR PATCH /guests/int:id**  
-  Updates the details of a guest.
+  - **PUT OR PATCH /drinks/int:id**  
+  Updates the details of a drink
 
   **Request Body**:
   ```json
   {
-      "first_name": "John",
-      "last_name": "Doe",
-      "country": "USA"
+      "drink_id": 11,
+      "drink_name": "White Russia ",
+      "category": "Cocktail",
+      "price": "160",
+      "sale_count": 0
   }
   
 **Response**:  
@@ -89,9 +96,9 @@ This API allows you to manage guest records in a SQLite database. You can perfor
   ```json
   [
       {
-          "message": "Guest updated successfully"
+          "message": "Drink updated successfully"
       },
       ...
   ]
   ```
-- `404 Not Found` if the guest does not exist.
+- `404 Not Found` if the drink does not exist.
