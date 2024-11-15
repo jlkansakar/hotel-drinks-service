@@ -5,6 +5,14 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app) 
 
+@app.route("/")
+def home():
+    return jsonify({
+        "service": "Drinks service",
+        "version": "1.0.0",
+        "description": "A RESTful API service that provides drinks",
+    })
+
 @app.route("/drinks", methods=['GET', 'POST'])
 def drinks():
     conn = sqlite3.connect('drinks.db')
