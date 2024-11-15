@@ -13,6 +13,18 @@ def home():
         "description": "A RESTful API service that provides drinks",
     })
 
+@app.route("/api")
+def api(): 
+    return jsonify({
+        "home": "https://drinks-service-fvf5eph2g3gybfhq.northeurope-01.azurewebsites.net",
+        "api": "https://drinks-service-fvf5eph2g3gybfhq.northeurope-01.azurewebsites.net/api",
+        "drinks list": "https://drinks-service-fvf5eph2g3gybfhq.northeurope-01.azurewebsites.net/drinks",
+        "specific drink by id": "https://drinks-service-fvf5eph2g3gybfhq.northeurope-01.azurewebsites.net/drinks/<int:drink_id>"
+    })
+
+
+
+
 @app.route("/drinks", methods=['GET', 'POST'])
 def drinks():
     conn = sqlite3.connect('drinks.db')
