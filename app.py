@@ -1,7 +1,30 @@
 import sqlite3
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app) 
+
+@app.route("/")
+def home():
+    return jsonify({
+        "service": "Drinks service",
+        "version": "1.0.0",
+        "description": "A RESTful API service that provides drinks",
+    })
+
+@app.route("/api")
+def api(): 
+    return jsonify({
+        "home": "https://drinks-service-fvf5eph2g3gybfhq.northeurope-01.azurewebsites.net",
+        "api": "https://drinks-service-fvf5eph2g3gybfhq.northeurope-01.azurewebsites.net/api",
+        "drinks list": "https://drinks-service-fvf5eph2g3gybfhq.northeurope-01.azurewebsites.net/drinks",
+        "specific drink by id": "https://drinks-service-fvf5eph2g3gybfhq.northeurope-01.azurewebsites.net/drinks/<int:drink_id>"
+        "openAPI documentation": "https://editor.swagger.io/whatever-the-link-is-when-actually-made"
+    })
+
+
+
 
 @app.route("/drinks", methods=['GET', 'POST'])
 def drinks():
@@ -120,4 +143,4 @@ def drink(drink_id):
     
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
