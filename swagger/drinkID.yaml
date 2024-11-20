@@ -1,4 +1,7 @@
 # swagger/drinkID
+servers:
+  - url: https://<your-app-name>.azurewebsites.net
+    description: Azure server
 
 get:
   summary: Get a specific drink

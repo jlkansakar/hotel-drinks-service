@@ -1,10 +1,13 @@
 # swagger/drinks_get_post.yaml
+servers:
+  - url: https://<your-app-name>.azurewebsites.net
+    description: Azure server
 
 get:
   summary: Get all drinks
   description: Returns a list of all drinks.
   responses:
-    200:
+    '200':
       description: A list of drinks
       content:
         application/json:
@@ -29,6 +32,13 @@ get:
                 sale_count:
                   type: integer
                   example: 150
+    '404':
+          description: No drinks found.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}                  
 
 post:
   summary: Add a new drink
@@ -54,7 +64,7 @@ post:
               type: integer
               example: 100
   responses:
-    201:
+    '201':
       description: Drink added successfully
       content:
         application/json:
@@ -77,3 +87,5 @@ post:
               sale_count:
                 type: integer
                 example: 100
+      '400':
+          description: Invalid input data.

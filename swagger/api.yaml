@@ -1,4 +1,7 @@
 # swagger/api.yaml
+servers:
+  - url: https://<your-app-name>.azurewebsites.net
+    description: Azure server
 
 get:
   summary: API info route
