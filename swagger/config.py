@@ -13,7 +13,7 @@ swagger_config = {
     ],
     "static_url_path": "/flasgger_static",
     "swagger_ui": True,
-    "specs_route": "/apidocs"
+    "specs_route": "/docs"
 }
 
 template = {
@@ -24,6 +24,14 @@ template = {
         "contact": {
             "name": "KEA",
             "url": "https://kea.dk"
+        }
+    },
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Authorization header using the Bearer scheme. Example: \"Bearer {token}\""
         }
     }
 }
