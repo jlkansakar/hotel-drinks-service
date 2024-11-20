@@ -1,0 +1,22 @@
+# swagger/home.yaml
+
+get:
+  summary: Home route
+  description: Returns a JSON object with service information.
+  responses:
+    200:
+      description: Service information
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              service:
+                type: string
+                example: "Drinks service"
+              version:
+                type: string
+                example: "1.0.0"
+              description:
+                type: string
+                example: "A RESTful API service that provides drinks"

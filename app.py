@@ -1,11 +1,13 @@
 import sqlite3
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from flasgger import swag_from
 
 app = Flask(__name__)
 CORS(app) 
 
 @app.route("/")
+@swag_from("swagger/home.yaml")
 def home():
     return jsonify({
         "service": "Drinks service",
@@ -14,6 +16,7 @@ def home():
     })
 
 @app.route("/api")
+@swag_from("swagger/api.yaml")
 def api(): 
     return jsonify({
         "home": "https://drinks-service-fvf5eph2g3gybfhq.northeurope-01.azurewebsites.net",
@@ -27,6 +30,7 @@ def api():
 
 
 @app.route("/drinks", methods=['GET', 'POST'])
+@swag_from("swagger/drinks.yaml")
 def drinks():
     conn = sqlite3.connect('drinks.db')
     cursor = conn.cursor()
@@ -83,6 +87,7 @@ def drinks():
     
 
 @app.route("/drinks/<int:drink_id>", methods=['GET','DELETE', 'PUT', 'PATCH'])
+@swag_from("swagger/drinkID.yaml")
 def drink(drink_id):
     conn = sqlite3.connect('drinks.db')
     cursor = conn.cursor()

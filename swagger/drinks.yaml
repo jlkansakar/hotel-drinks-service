@@ -1,0 +1,79 @@
+# swagger/drinks_get_post.yaml
+
+get:
+  summary: Get all drinks
+  description: Returns a list of all drinks.
+  responses:
+    200:
+      description: A list of drinks
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                drink_id:
+                  type: integer
+                  example: 1
+                drink_name:
+                  type: string
+                  example: "Coke"
+                category:
+                  type: string
+                  example: "Soda"
+                price:
+                  type: number
+                  format: float
+                  example: 1.99
+                sale_count:
+                  type: integer
+                  example: 150
+
+post:
+  summary: Add a new drink
+  description: Adds a new drink to the database.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            drink_name:
+              type: string
+              example: "Sprite"
+            category:
+              type: string
+              example: "Soda"
+            price:
+              type: number
+              format: float
+              example: 1.99
+            sale_count:
+              type: integer
+              example: 100
+  responses:
+    201:
+      description: Drink added successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              drink_id:
+                type: integer
+                example: 3
+              drink_name:
+                type: string
+                example: "Sprite"
+              category:
+                type: string
+                example: "Soda"
+              price:
+                type: number
+                format: float
+                example: 1.99
+              sale_count:
+                type: integer
+                example: 100

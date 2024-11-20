@@ -1,0 +1,126 @@
+# swagger/drinkID
+
+get:
+  summary: Get a specific drink
+  description: Returns details of a drink by ID.
+  parameters:
+    - in: path
+      name: drink_id
+      schema:
+        type: integer
+      required: true
+      description: The ID of the drink
+  responses:
+    200:
+      description: Drink found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              drink_id:
+                type: integer
+                example: 1
+              drink_name:
+                type: string
+                example: "Coke"
+              category:
+                type: string
+                example: "Soda"
+              price:
+                type: number
+                format: float
+                example: 1.99
+              sale_count:
+                type: integer
+                example: 150
+    404:
+      description: Drink not found
+
+delete:
+  summary: Delete a specific drink
+  description: Deletes a drink by ID.
+  parameters:
+    - in: path
+      name: drink_id
+      schema:
+        type: integer
+      required: true
+      description: The ID of the drink
+  responses:
+    204:
+      description: No content
+    404:
+      description: Drink not found
+
+put:
+  summary: Update a specific drink
+  description: Updates all details of a drink by ID.
+  parameters:
+    - in: path
+      name: drink_id
+      schema:
+        type: integer
+      required: true
+      description: The ID of the drink
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            drink_name:
+              type: string
+              example: "Pepsi"
+            category:
+              type: string
+              example: "Soda"
+            price:
+              type: number
+              format: float
+              example: 1.49
+            sale_count:
+              type: integer
+              example: 200
+  responses:
+    200:
+      description: Drink updated successfully
+    404:
+      description: Drink not found
+
+patch:
+  summary: Partially update a specific drink
+  description: Partially updates details of a drink by ID.
+  parameters:
+    - in: path
+      name: drink_id
+      schema:
+        type: integer
+      required: true
+      description: The ID of the drink
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            drink_name:
+              type: string
+              example: "Pepsi"
+            category:
+              type: string
+              example: "Soda"
+            price:
+              type: number
+              format: float
+              example: 1.49
+            sale_count:
+              type: integer
+              example: 200
+  responses:
+    200:
+      description: Drink updated successfully
+    404:
+      description: Drink not found

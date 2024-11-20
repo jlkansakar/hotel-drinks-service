@@ -1,0 +1,28 @@
+# swagger/api.yaml
+
+get:
+  summary: API info route
+  description: Returns a JSON object with links to various endpoints in the API.
+  responses:
+    200:
+      description: Endpoint links
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              home:
+                type: string
+                example: "https://drinks-service.azurewebsites.net"
+              api:
+                type: string
+                example: "https://drinks-service.azurewebsites.net/api"
+              drinks list:
+                type: string
+                example: "https://drinks-service.azurewebsites.net/drinks"
+              specific drink by id:
+                type: string
+                example: "https://drinks-service.azurewebsites.net/drinks/{drink_id}"
+              openAPI documentation:
+                type: string
+                example: "https://editor.swagger.io"
