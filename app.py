@@ -2,9 +2,11 @@ import sqlite3
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flasgger import swag_from
+from swagger.config import init_swagger
 
 app = Flask(__name__)
-CORS(app) 
+CORS(app)
+init_swagger(app) 
 
 @app.route("/")
 @swag_from("swagger/home.yaml")
