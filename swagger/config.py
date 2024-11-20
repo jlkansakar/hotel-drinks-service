@@ -25,15 +25,8 @@ template = {
             "name": "KEA",
             "url": "https://kea.dk"
         }
-    },
-    "securityDefinitions": {
-        "Bearer": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header",
-            "description": "JWT Authorization header using the Bearer scheme. Example: \"Bearer {token}\""
-        }
     }
+    
 }
 
 def init_swagger(app):
